@@ -1,0 +1,70 @@
+Visualforce page
+----------------
+<apex:page controller="MyController" showHeader="false" action="{!redirectPage}">
+
+
+
+ <apex:form >
+        <apex:pageBlock title="Congratulations {!$User.FirstName}">
+          
+         <!--    Referr Name: {!RefererValue} -->
+           
+        </apex:pageBlock>
+         <apex:commandButton value="Redirect" action="{!redirectPage}"/>
+    </apex:form>
+    
+</apex:page>
+             
+MyController
+-----------
+
+public class MyController {
+
+    private final String paramvalue;
+ private final String RefererValue;
+ private final String initVal;
+    public MyController() {
+        paramvalue = ApexPages.currentPage().getParameters().get('id');
+        RefererValue= ApexPages.currentPage().getHeaders().get('Referer');
+        
+       ApexPages.PageReference ref = new ApexPages.PageReference(RefererValue);
+  Map<String, String> params = ref.getParameters();
+  for(String key: params.keySet()) {
+ 
+    system.debug(key + params.get(key));
+    
+    
+  }
+   system.debug(params.get('init'));
+   initVal = params.get('init');
+   if (params.get('init') == '0sp7F000000PCsF') {
+   
+  
+ 
+     }
+   
+    }
+
+    public String getParamvalue() {
+        return paramvalue;
+    }
+public String getRefererValue() {
+        return RefererValue;
+    }
+    
+    public PageReference redirectPage() {
+     string url = 'http://www.google.ca/';
+       PageReference page;
+    if (initVal == '0sp7F000000PCsF') {
+     page = new PageReference(url);
+          page.setRedirect(true);
+          page.setRedirectCode(301);
+
+          
+}
+         return page;
+          }
+  
+    
+    
+}
