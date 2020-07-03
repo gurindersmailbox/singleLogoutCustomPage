@@ -1,3 +1,5 @@
+https://curious-bear-488636-dev-ed.my.salesforce.com/
+
 Visualforce page
 ----------------
 <apex:page controller="MyController" showHeader="false" action="{!redirectPage}">
